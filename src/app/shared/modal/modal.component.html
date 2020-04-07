@@ -1,0 +1,11 @@
+<div class="overlay-bg" *ngIf="isOpen">
+    <div #dialog class="modal">
+        <div class="modal-header">
+            <ng-content select=".title"></ng-content>
+            <span class="times" (click)="close()"></span>
+        </div>
+    </div>
+    <div class="modal-body">
+        <ng-content select=".body"></ng-content>
+    </div>
+</div>

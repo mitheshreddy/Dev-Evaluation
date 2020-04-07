@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row mt-2">
+    <div class="col">
+      <input type="text" #search class="form-control" (keyup)="debounce()" placeholder="search by title..">
+    </div>
+  </div>
+  <div class="row mt-1">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Url</th>
+              <th>Created At</th>
+              <th>Author</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="pollsList; then pollsData else pollError"></ng-container>
+            <ng-template #pollsData>
+              <tr *ngFor="let poll of pollsList" (click)='openModal(poll)'>
+                <td>{{poll.title}}</td>
+                <td>{{poll.url}}</td>
+                <td>{{poll.created_at | date: 'mediumDate'}}</td>
+                <td>{{poll.author}}</td>
+              </tr>
+            </ng-template>
+            <ng-template #pollError>
+              <tr>
+                <td colspan="4">Something went wrong...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal #modal>
+    <h3 class="title">Raw poll JSON</h3>
+    <div class="body" *ngIf="poll">
+        <p>{{getPoll(poll)}}</p>
+    </div>
+</app-modal>
