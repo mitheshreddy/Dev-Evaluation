@@ -13,6 +13,7 @@ export class PollsComponent implements OnInit {
   searchTimeout: any;
   delay = 10000;
   poll: any;
+  pollTimer: any;
 
   constructor(private pollsService: PollsService) { }
   public pollsList: any;
@@ -34,10 +35,17 @@ export class PollsComponent implements OnInit {
   } 
 
   ngDoCheck() {
+    clearTimeout(this.pollTimer);
     if (!this.hasError) {
-      setTimeout(() => {
+      this.pollTimer = setTimeout(() => {
+        let isPollModalOpen = this.modalDialog.isOpen;
+        if (isPollModalOpen) isPollModalOpen = false;
 
-      })
+        this.pollsService.getPollsList().subscribe((data: any) => {
+          this.pollsList = data.hits;
+          this.filteredList = [...this.pollsList];
+        })
+      }, this.delay)
     }
   }
 
