@@ -6,8 +6,8 @@ import { Component, OnInit, HostListener } from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  isOpen: boolean;
-  @HostListener('window.click', ['$event'])
+  isOpen = false;
+  @HostListener('window:click', ['$event'])
   onWindowClick($event) {
     const target = $event.target.className;
     if (target === 'overlay-bg') {

@@ -17,7 +17,7 @@
   }
   
   /* Modal Body */
-  .modal-body {padding: 2px 16px;}
+  .modal-body {padding: 2px 16px; background: #fff;}
   
   /* Modal Footer */
   .modal-footer {
